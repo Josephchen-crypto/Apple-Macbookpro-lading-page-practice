@@ -1,185 +1,302 @@
+/* ==========================================
+   Macbook Landing Page - CSS 样式文件
+   ==========================================
+   此文件包含 Macbook 产品展示页面的所有样式定义，使用 Tailwind CSS 框架
+   结合自定义样式实现。文件结构如下：
+   1. 导入与字体定义
+   2. 全局样式与滚动条自定义
+   3. CSS 变量与渐变定义
+   4. Tailwind 主题配置
+   5. 自定义工具类
+   6. 组件样式（header、hero、product-viewer、showcase 等）
+   ========================================== */
+
 @import "tailwindcss";
 
+/* ==========================================
+   字体定义
+   ==========================================
+   为整个网站提供一致的字体排版。使用自定义字体文件
+   确保跨平台的字体一致性。
+   ========================================== */
+
+/* 常规字重字体 (400) - 用于正文文本和次要内容 */
 @font-face {
   font-family: "Regular";
   src: url("/fonts/regular.otf");
 }
 
+/* 中等字重字体 (500) - 用于导航链接和强调文本 */
 @font-face {
   font-family: "Medium";
   src: url("/fonts/medium.otf");
 }
 
+/* 半粗体字重字体 (600) - 用于标题和重要按钮 */
 @font-face {
   font-family: "SemiBold";
   src: url("/fonts/semibold.otf");
 }
 
+/* 粗体字重字体 (700) - 用于主要标题和强强调 */
 @font-face {
   font-family: "Bold";
   src: url("/fonts/bold.otf");
 }
 
+/* ==========================================
+   全局样式与滚动条自定义
+   ========================================== */
+
+/* 为所有元素自定义滚动条样式 */
 * {
+  /* 设置滚动条滑块(手柄)颜色和轨道(背景)颜色 */
   scrollbar-color: var(--color-dark-100) var(--color-black);
 }
 
+/* ==========================================
+   CSS 变量与渐变定义
+   ==========================================
+   定义可复用的 CSS 变量和渐变效果，提高代码可维护性和一致性。
+   ========================================== */
+
+/* 全局 CSS 变量定义 - 所有页面元素可访问 */
 :root {
+  /* 创建一个多彩渐变效果，用于按钮、边框等强调元素 */
   --gradient-color: linear-gradient(
     to bottom right,
-    #0894ff 0%,
-    #c959dd 34%,
-    #ff2e54 68%,
-    #ff9004
+    /* 渐变方向: 从左上角到右下角 */ #0894ff 0%,
+    /* 起始点 (0%): 明亮蓝色 */ #c959dd 34%,
+    /* 34% 位置: 紫色 */ #ff2e54 68%,
+    /* 68% 位置: 粉红色 */ #ff9004 100% /* 结束点 (100%): 橙色 */
   );
 }
 
+/* ==========================================
+   Tailwind 主题配置
+   ==========================================
+   自定义 Tailwind 默认主题值，确保整个设计系统的一致性。
+   这里定义的变量可以在 HTML 中直接使用 Tailwind 类名访问（如 bg-primary）。
+   ========================================== */
+
 @theme {
-  --font-regular: "Regular";
-  --font-medium: "Medium";
-  --font-semibold: "SemiBold";
-  --font-bold: "Bold";
-  --color-primary: #0071e3;
-  --color-dark-100: #86868b;
-  --color-dark-200: #2e2e30;
-  --color-light-100: #adb5bd;
+  /* 字体系列变量 - 将自定义字体映射到 Tailwind 主题中 */
+  --font-regular: "Regular"; /* 常规字重字体 */
+  --font-medium: "Medium"; /* 中等字重字体 */
+  --font-semibold: "SemiBold"; /* 半粗体字重字体 */
+  --font-bold: "Bold"; /* 粗体字重字体 */
+
+  /* 颜色变量 - 定义品牌色彩系统 */
+  --color-primary: #0071e3; /* 主蓝色 - 用于按钮、链接等主要交互元素 */
+  --color-dark-100: #86868b; /* 浅灰色文本 - 用于次要文本和说明文字 */
+  --color-dark-200: #2e2e30; /* 深灰色背景 - 用于卡片、弹窗等深色背景 */
+  --color-light-100: #adb5bd; /* 浅灰色边框 - 用于分隔线、输入框边框等 */
 }
 
+/* ==========================================
+   基础 HTML/Body 样式
+   ==========================================
+   设置页面的全局基础样式，包括布局、滚动行为和默认外观。
+   ========================================== */
+
 html {
-  width: 100vw;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  width: 100vw; /* 设置为完整的视口宽度 */
+  overflow-x: hidden; /* 隐藏水平滚动条，防止页面宽度溢出 */
+  scroll-behavior: smooth; /* 实现锚点链接之间的平滑滚动效果 */
 }
 
 body {
-  width: 100vw;
-  overflow-x: hidden;
-  background-color: #000;
-  color: var(--color-dark-100);
-  font-family: var(--font-semibold);
+  width: 100vw; /* 设置为完整的视口宽度 */
+  overflow-x: hidden; /* 隐藏水平滚动条，保持页面整洁 */
+  background-color: #000; /* 黑色背景，营造沉浸式体验 */
+  color: var(--color-dark-100); /* 使用CSS变量设置默认文本颜色 */
+  font-family: var(--font-semibold); /* 使用自定义字体和字重 */
+  margin: 0; /* 移除默认边距 */
+  padding: 0; /* 移除默认内边距 */
 }
 
+/* ==========================================
+   自定义工具类
+   ==========================================
+   可复用的 CSS 类，用于常见的布局模式和样式需求。
+   ========================================== */
+
+/* Flexbox 居中对齐 */
 @utility flex-center {
   @apply flex items-center justify-center;
 }
 
+/* Flexbox 两端对齐 */
 @utility flex-between {
   @apply flex items-center justify-between;
 }
 
+/* 列 Flexbox 居中对齐 */
 @utility col-center {
   @apply flex flex-col items-center justify-center;
 }
 
+/* 绝对定位居中（相对于父元素） */
 @utility abs-center {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
+/* H3 标题半粗体样式 */
 @utility h3-semibold {
   @apply font-semibold text-xl text-dark-100;
 }
 
+/* 基础文本半粗体样式 */
 @utility base-semibold {
   @apply font-semibold text-base text-dark-100;
 }
 
+/* 小文本中等字重样式 */
 @utility small-medium {
   @apply font-medium text-xs;
 }
 
+/* ==========================================
+   组件样式
+   ==========================================
+   使用 Tailwind 的 layer 系统定义各页面组件的样式。
+   这种方式可以确保样式的优先级正确，同时保持代码的模块化。
+   ========================================== */
+
 @layer components {
+  /* ======================================
+     Header 组件
+     ======================================
+     页面顶部导航栏，固定定位在视口顶部，包含网站logo、导航菜单和其他功能按钮。
+     ====================================== */
   header {
     @apply w-screen fixed top-0 left-0 z-50 flex-center bg-black min-h-[7vh];
 
     nav {
+      /* 导航容器 - 使用flex-between工具类实现内容两端对齐 */
       @apply container mx-auto flex-between px-5 2xl:px-0;
 
       img {
+        /* Logo图片 - 添加悬停效果和过渡动画 */
         @apply cursor-pointer hover:-translate-y-0.5 transition-all duration-300 ease-in-out;
 
         button {
+          /* Logo内部的按钮 - 移除默认样式 */
           @apply bg-transparent border-none outline-none cursor-pointer;
         }
       }
 
       ul {
+        /* 导航菜单列表 - 使用flex-center工具类实现水平居中对齐 */
         @apply flex-center gap-8;
 
         a {
+          /* 导航链接 - 仅在中等及以上屏幕显示，添加悬停效果 */
           @apply hidden md:block text-white opacity-80 font-regular text-sm cursor-pointer hover:opacity-100 transition-all duration-300 ease-in-out;
         }
       }
     }
   }
 
+  /* ======================================
+     Hero 区域
+     ======================================
+     页面的主要展示区域，包含产品标题、产品图片/视频和主要行动按钮。
+     采用响应式设计，在不同屏幕尺寸下有不同的布局和定位。
+     ====================================== */
   #hero {
     @apply h-fit lg:h-[80vh] col-center mt-40 lg:mt-20 2xl:mt-[7vh];
 
     div {
+      /* 内容容器 - 相对定位并设置较高层级，确保内容显示在视频上方 */
       @apply relative z-10 col-center lg:translate-y-16;
 
       h1 {
+        /* 主标题 - 响应式字体大小，在大屏幕上更大更突出 */
         @apply font-semibold lg:text-3xl 2xl:text-5xl text-white;
       }
 
       img {
+        /* 产品图片 - 自适应容器宽度，占据2/3的可用空间 */
         @apply container mx-auto w-2/3;
       }
     }
 
     video {
+      /* 背景视频 - 居中显示，在大屏幕上有特定的垂直偏移 */
       @apply mx-auto lg:translate-y-5 2xl:translate-y-0;
     }
 
     button {
+      /* 主要行动按钮 - 带有悬停效果和过渡动画，使用主色调 */
       @apply relative z-10 bg-primary text-white py-2 px-6 mt-10 lg:mt-0 mb-5 rounded-full font-semibold text-lg cursor-pointer hover:bg-white hover:text-black transition-all duration-300 ease-in-out;
     }
 
     p {
+      /* 说明文本 - 根据屏幕尺寸应用不同的预设样式 */
       @apply lg:h3-semibold base-semibold;
     }
   }
 
+  /* ======================================
+     产品查看器区域
+     ======================================
+     包含3D产品查看器和控制选项的部分，允许用户从不同角度和颜色查看产品。
+     ====================================== */
   #product-viewer {
     @apply container relative min-h-[93vh] mx-auto px-5 2xl:px-0 mt-40;
 
     h2 {
+      /* 区域标题 - 响应式字体大小，在大屏幕上更突出 */
       @apply text-white font-semibold text-3xl lg:text-6xl;
     }
 
     .controls {
+      /* 3D查看器控制区域 - 绝对定位在底部中央，高层级确保可见 */
       @apply absolute z-50 bottom-40 lg:bottom-40 2xl:bottom-52 left-1/2 -translate-x-1/2;
 
       .info {
+        /* 控制区域信息文本 - 半透明黑色背景增强可读性 */
         @apply text-xs text-white bg-black/20 px-2 py-1 rounded-lg;
       }
 
       .color-control {
+        /* 颜色选择器 - 水平排列的颜色选项 */
         @apply flex-between bg-neutral-800 rounded-full px-6 py-3 gap-4;
 
         div {
+          /* 颜色选项 - 圆形按钮，点击切换产品颜色 */
           @apply size-7 rounded-full cursor-pointer;
         }
 
         .active {
+          /* 当前选中的颜色 - 特殊样式区分，添加边框和大小变化 */
           @apply ring-5 size-5 ring-light-100;
         }
       }
 
       .size-control {
+        /* 尺寸选择器 - 使用小文本样式，背景与颜色选择器保持一致 */
         @apply small-medium flex-between bg-neutral-800 rounded-full px-6 py-2.5 gap-2;
 
         div {
+          /* 尺寸选项 - 圆形按钮，点击切换产品尺寸 */
           @apply size-8 rounded-full cursor-pointer bg-white text-black flex-center;
         }
       }
     }
 
     #canvas {
+      /* 3D产品画布 - 占满可用宽度，设置固定高度以保证3D渲染区域 */
       @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
     }
   }
 
+  /* ======================================
+     产品展示区域
+     ======================================
+     使用视频和图片组合展示产品的不同功能和设计特点。
+     ====================================== */
   #showcase {
     @apply relative;
 
@@ -191,15 +308,21 @@ body {
       }
 
       .mask {
+        /* 遮罩层 - 绝对定位覆盖整个视频区域 */
         @apply absolute h-full top-0 lg:-top-20 xl:top-0;
 
         img {
+          /* 遮罩图片 - 使用缩放和矩阵变换实现特殊视觉效果 */
           @apply h-full scale-150 lg:scale-100;
+          /* 矩阵变换实现图片的特殊缩放和定位效果 */
+          /* 矩阵参数: 缩放X、倾斜X、倾斜Y、缩放Y、平移X、平移Y */
           transform: matrix(80, 0, 0, 80, 0, 0);
         }
 
+        /* 响应式设计 - 中等屏幕及以下设备的调整 */
         @media (max-width: 1024px) {
           img {
+            /* 移动端重置矩阵变换，恢复正常显示 */
             transform: matrix(1, 0, 0, 1, 0, 0);
           }
         }
@@ -207,22 +330,32 @@ body {
     }
 
     .content {
+      /* 内容区域 - 相对定位并设置较高层级，在大屏幕上通过负margin覆盖视频 */
+      /* lg:opacity-0 表示在大屏幕上初始隐藏，可能通过JavaScript动画显示 */
       @apply relative z-10 my-5 lg:-mt-40 bg-black font-semibold text-xl text-dark-100 lg:opacity-0;
 
       .wrapper {
+        /* 内容包装器 - 响应式布局，在大屏幕上使用横向排列 */
         @apply container mx-auto px-5 pb-20 2xl:px-0 flex flex-col lg:flex-row justify-center gap-20;
       }
 
       h2 {
+        /* 主标题 - 响应式字体大小，在大屏幕上非常突出 */
         @apply font-semibold text-3xl lg:text-7xl text-white;
       }
 
       h3 {
+        /* 副标题 - 响应式字体大小，与主标题形成视觉层次 */
         @apply font-semibold text-xl lg:text-5xl text-white;
       }
     }
   }
 
+  /* ======================================
+     性能展示区域
+     ======================================
+     使用绝对定位的图片展示产品的性能特点，创建分层视觉效果。
+     ====================================== */
   #performance {
     @apply w-dvw h-full overflow-hidden pt-20 lg:pt-20 flex flex-col items-center relative;
 
@@ -231,37 +364,47 @@ body {
     }
 
     .wrapper {
+      /* 图片容器 - 相对定位，设置固定尺寸，大屏幕上占满整个屏幕高度 */
       @apply w-7xl 2xl:w-[100rem] h-[50vh] lg:h-screen relative;
 
       img {
+        /* 基础图片样式 - 响应式最大宽度，保持原始比例居中显示 */
         @apply max-w-40 lg:max-w-[27rem] 2xl:max-w-[35rem] object-cover object-center;
       }
 
+      /* 使用绝对定位实现图片的分层布局效果 */
       .p1 {
+        /* 第一张图片 - 绝对定位在左上方，z-index:1 表示在最底层 */
         @apply absolute bottom-1/2 left-[23%] z-[1] max-sm:left-[33%];
       }
 
       .p2 {
+        /* 第二张图片 - 绝对定位在右上方，z-index:3 表示在较高层级 */
         @apply absolute bottom-[40%] right-[17%] z-[3] max-sm:right-[37%];
       }
 
       .p3 {
+        /* 第三张图片 - 绝对定位在右下方，z-index:2 表示在中间层级 */
         @apply absolute bottom-1/4 right-[15%] z-[2] max-sm:right-[35%];
       }
 
       .p4 {
+        /* 第四张图片 - 绝对定位在右下方更靠近底部，z-index:1 表示在底层 */
         @apply absolute bottom-[15%] right-[10%] z-[1] max-sm:right-[30%];
       }
 
       .p5 {
+        /* 第五张图片 - 绝对定位在底部中央，放大1.5倍，突出显示 */
         @apply absolute bottom-[20%] left-1/2 -translate-x-1/2 scale-150;
       }
 
       .p6 {
+        /* 第六张图片 - 绝对定位在左下方，z-index:2 表示在中间层级 */
         @apply absolute bottom-1/4 left-1/4 z-[2] max-sm:left-[35%];
       }
 
       .p7 {
+        /* 第七张图片 - 绝对定位在左下方靠近底部，z-index:3 表示在较高层级 */
         @apply absolute bottom-[5%] left-[15%] z-[3] max-sm:left-[35%];
       }
     }
@@ -275,85 +418,122 @@ body {
     }
   }
 
+  /* ======================================
+     特性展示区域
+     ======================================
+     展示产品的核心特性，结合3D画布和描述文本，为用户提供直观的产品功能介绍。
+     ====================================== */
   #features {
     @apply pt-40 relative;
 
     h2 {
+      /* 区域标题 - 响应式设计，在大屏幕上使用非常大的字体以突出显示 */
       @apply text-white font-semibold text-3xl lg:text-7xl text-center max-w-3xl mx-auto;
     }
 
     #f-canvas {
+      /* 特性3D画布 - 占满整个视口高度，高层级确保3D内容显示在最上方 */
       @apply !w-full !h-dvh relative z-40;
     }
 
     .box {
+      /* 特性说明文本框 - 绝对定位，可放置在3D画布的任意位置 */
       @apply max-w-xs absolute;
 
       p {
+        /* 说明文本 - 根据屏幕尺寸应用不同的预设样式 */
         @apply lg:h3-semibold base-semibold;
       }
     }
   }
 
+  /* ======================================
+     亮点展示区域
+     ======================================
+     使用瀑布流布局展示产品的主要亮点和优势，包含特殊的渐变边框和文本效果。
+     ====================================== */
   #highlights {
     @apply container mx-auto lg:py-40 max-lg:px-5;
 
     h2 {
+      /* 主标题 - 响应式设计，大屏幕上使用超大字体突出显示 */
       @apply text-white font-semibold text-3xl lg:text-7xl text-center max-w-3xl mx-auto;
     }
 
     h3 {
+      /* 副标题 - 配合主标题使用，提供更详细的说明 */
       @apply text-[#F5F5F7] font-semibold text-xl lg:text-3xl text-center mt-10;
     }
 
+    /* 瀑布流网格布局 - 使用CSS Grid实现不规则排列效果 */
     .masonry {
       @apply grid grid-cols-1 lg:grid-cols-2 gap-5 mt-20 text-[#F5F5F7];
 
       .left-column {
+        /* 左列容器 - 初始状态隐藏，通过动画实现入场效果 */
         @apply flex flex-col justify-between gap-5 opacity-0 -translate-y-5;
 
         div:first-of-type {
+          /* 左侧顶部卡片 - 使用背景图片增强视觉效果 */
           @apply h-full bg-[url(/highlight-bg.png)] bg-no-repeat bg-cover p-10 2xl:pt-32 lg:pt-20 rounded-3xl;
 
           p {
+            /* 卡片标题 - 大字体设计突出关键信息 */
             @apply font-semibold text-4xl max-w-2xs;
           }
         }
 
         p {
+          /* 左侧中间文本 - 独立显示的关键信息 */
           @apply font-semibold text-4xl max-w-2xs;
         }
 
         div:last-of-type {
+          /* 左侧底部卡片 - 深色背景设计，与顶部卡片形成对比 */
           @apply bg-[#1D1D1F] p-10 rounded-3xl flex items-center gap-7;
 
           p {
+            /* 卡片内容 - 中等字体大小，适合详细说明 */
             @apply font-semibold lg:text-2xl 2xl:text-3xl;
           }
         }
       }
 
       .right-column {
+        /* 右列容器 - 与左列相同的入场动画效果 */
         @apply flex flex-col justify-between gap-5 opacity-0 -translate-y-5;
 
         p {
+          /* 右侧顶部文本 - 独立显示的关键信息 */
           @apply font-semibold text-4xl max-w-2xs;
         }
+
+        /* 苹果渐变边框效果 - 使用伪元素实现复杂的渐变边框 */
         .apple-gradient {
           @apply p-10 rounded-3xl flex items-center gap-7 relative;
 
+          /* 卡片背景色 */
           background: #1d1d1f;
-          background-clip: padding-box; /* !important */
-          border: 3px solid transparent; /* !important */
+          /* 确保背景不会透过边框显示 */
+          background-clip: padding-box;
+          /* 透明边框为渐变效果留出空间 */
+          border: 3px solid transparent;
 
+          /* 使用伪元素创建渐变边框效果 */
           ::before {
             content: "";
+            /* 防止伪元素影响用户交互 */
             pointer-events: none;
+            /* 绝对定位覆盖整个父元素 */
             position: absolute;
             inset: 0px;
+            /* 置于内容下方 */
             z-index: -1;
-            margin: -5px; /* !important */
-            border-radius: 24px; /* !important */
+            /* 负外边距使渐变边框超出父元素 */
+            margin: -5px;
+            /* 与父元素相同的圆角 */
+            border-radius: 24px;
+            /* 实现渐变色边框的关键 - 应用于伪元素的渐变背景 */
             background: linear-gradient(
               91deg,
               #0096ff 0%,
@@ -364,9 +544,11 @@ body {
           }
 
           p {
+            /* 卡片内容 - 适应不同屏幕尺寸 */
             @apply font-semibold lg:text-2xl 2xl:text-3xl;
 
             span {
+              /* 渐变文本效果 - 与边框渐变颜色一致 */
               background: linear-gradient(
                 91deg,
                 #0096ff 0%,
@@ -374,19 +556,24 @@ body {
                 #f2416b 74%,
                 #eb7500 100%
               );
+              /* 将背景裁剪为文本形状 */
               background-clip: text;
               -webkit-background-clip: text;
+              /* 使文本颜色透明，显示背景渐变 */
               -webkit-text-fill-color: transparent;
             }
           }
         }
 
         div:last-of-type {
+          /* 右侧底部卡片 - 深色背景，与左侧卡片风格一致 */
           @apply h-full bg-[#1D1D1F] p-10 2xl:pt-32 lg:pt-20 rounded-3xl;
 
           p {
+            /* 卡片内容 - 大字体设计突出显示 */
             @apply font-semibold text-4xl max-w-sm;
 
+            /* 绿色渐变文本效果 - 突出显示关键信息 */
             .green-gradient {
               background: linear-gradient(90deg, #35a98a 0%, #6dd400 100%);
               background-clip: text;
@@ -399,32 +586,44 @@ body {
     }
   }
 
+  /* ======================================
+     页脚组件
+     ======================================
+     页面底部的版权信息和导航链接区域，包含网站的重要声明和辅助导航。
+     ====================================== */
   footer {
     @apply container mx-auto py-7 max-lg:px-5;
 
     .info {
+      /* 版权信息区域 - 两端对齐布局 */
       @apply flex-between;
 
       p {
+        /* 版权文本 - 小号字体设计 */
         @apply text-sm font-medium;
 
         span {
+          /* 特殊标记 - 使用主色调突出显示 */
           @apply text-primary mx-0.5;
         }
       }
     }
 
     hr {
+      /* 分隔线 - 分隔版权信息和导航链接 */
       @apply my-7 text-[#424245];
     }
 
     .links {
+      /* 导航链接区域 - 响应式设计，在大屏幕上横向排列 */
       @apply flex flex-col lg:flex-row lg:items-center justify-between max-lg:mt-5 gap-5 text-sm;
 
       ul {
+        /* 链接列表 - 大屏幕上使用竖线分隔各个链接 */
         @apply lg:divide-x flex flex-col lg:flex-row gap-2.5;
 
         li {
+          /* 单个链接 - 悬停效果使用主色调，添加过渡动画 */
           @apply lg:px-5 cursor-pointer hover:text-primary transition-all duration-300 ease-in-out;
         }
       }
