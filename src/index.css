@@ -156,6 +156,10 @@ body {
   @apply font-medium text-xs;
 }
 
+@utility border-red {
+  @apply border border-red-500;
+}
+
 /* ==========================================
    组件样式
    ==========================================
@@ -244,7 +248,7 @@ body {
      包含3D产品查看器和控制选项的部分，允许用户从不同角度和颜色查看产品。
      ====================================== */
   #product-viewer {
-    /* @apply container relative min-h-[93vh] mx-auto px-5 2xl:px-0 mt-40; */
+    @apply container relative min-h-[93vh] mx-auto px-5 2xl:px-0 mt-40;
 
     h2 {
       /* 区域标题 - 响应式字体大小，在大屏幕上更突出 */

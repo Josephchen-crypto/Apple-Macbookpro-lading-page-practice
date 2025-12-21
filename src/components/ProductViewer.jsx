@@ -1,19 +1,66 @@
+import clsx from "clsx";
+import useMacbookStore from "../store";
+import { Canvas } from "@react-three/fiber";
+import { Box, OrbitControls } from "@react-three/drei";
+
 const ProductViewer = () => {
+  const { color, setColor, scale, setScale } = useMacbookStore();
+
   return (
-    <section
-      id="product-viewer"
-      className="container relative min-h-[93vh] mx-auto px-5 2xl:px-0 border border-red-600"
-    >
+    <section id="product-viewer">
       <h2>Take a closer look.</h2>
-      <div>
-        <p className="info">MacBookPro 16" in Space Black</p>
+      <div className="controls">
+        <p className="info">MacBookPro 16" in {color}</p>
         <div className="flex-center gap-5 mt-5">
           <div className="color-control">
-            <div className="bg-neutral-300" />
-            <div className="bg-neutral-900" />
+            <div
+              onClick={() => setColor("#adb5bd")}
+              className={clsx(
+                "bg-neutral-300",
+                color === "#adb5bd" && "active"
+              )}
+            />
+            <div
+              onClick={() => setColor("#2e2c2e")}
+              className={clsx(
+                "bg-neutral-900",
+                color === "#2e2c2e" && "active"
+              )}
+            />
+          </div>
+          <div className="size-control">
+            <div
+              onClick={() => setScale(0.06)}
+              className={clsx(
+                scale === 0.06
+                  ? "bg-white text-black"
+                  : "bg-transparent text-white"
+              )}
+            >
+              <p>14"</p>
+            </div>
+            <div
+              onClick={() => setScale(0.08)}
+              className={clsx(
+                scale === 0.08
+                  ? "bg-white text-black"
+                  : "bg-transparent text-white"
+              )}
+            >
+              <p>16"</p>
+            </div>
           </div>
         </div>
       </div>
+
+      <Canvas id="canvas">
+        <Box
+          position={[0, 0, 0]}
+          scale={10 * scale}
+          material-color={color}
+        ></Box>
+        <OrbitControls enableZoom={false} />
+      </Canvas>
     </section>
   );
 };
