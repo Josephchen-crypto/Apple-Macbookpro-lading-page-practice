@@ -205,36 +205,36 @@ body {
      采用响应式设计，在不同屏幕尺寸下有不同的布局和定位。
      ====================================== */
   #hero {
-    @apply h-fit lg:h-[80vh] col-center mt-40 lg:mt-20 2xl:mt-[7vh];
+    /* @apply h-fit lg:h-[80vh] col-center mt-40 lg:mt-20 2xl:mt-[7vh]; */
 
     div {
       /* 内容容器 - 相对定位并设置较高层级，确保内容显示在视频上方 */
-      @apply relative z-10 col-center lg:translate-y-16;
+      /* @apply relative z-10 col-center lg:translate-y-16; */
 
       h1 {
         /* 主标题 - 响应式字体大小，在大屏幕上更大更突出 */
-        @apply font-semibold lg:text-3xl 2xl:text-5xl text-white;
+        /* @apply font-semibold lg:text-3xl 2xl:text-5xl text-white; */
       }
 
       img {
         /* 产品图片 - 自适应容器宽度，占据2/3的可用空间 */
-        @apply container mx-auto w-2/3;
+        /* @apply container mx-auto w-2/3; */
       }
     }
 
     video {
       /* 背景视频 - 居中显示，在大屏幕上有特定的垂直偏移 */
-      @apply mx-auto lg:translate-y-5 2xl:translate-y-0;
+      /* @apply mx-auto lg:translate-y-5 2xl:translate-y-0; */
     }
 
     button {
       /* 主要行动按钮 - 带有悬停效果和过渡动画，使用主色调 */
-      @apply relative z-10 bg-primary text-white py-2 px-6 mt-10 lg:mt-0 mb-5 rounded-full font-semibold text-lg cursor-pointer hover:bg-white hover:text-black transition-all duration-300 ease-in-out;
+      /* @apply relative z-10 bg-primary text-white py-2 px-6 mt-10 lg:mt-0 mb-5 rounded-full font-semibold text-lg cursor-pointer hover:bg-white hover:text-black transition-all duration-300 ease-in-out; */
     }
 
     p {
       /* 说明文本 - 根据屏幕尺寸应用不同的预设样式 */
-      @apply lg:h3-semibold base-semibold;
+      /* @apply lg:h3-semibold base-semibold; */
     }
   }
 
