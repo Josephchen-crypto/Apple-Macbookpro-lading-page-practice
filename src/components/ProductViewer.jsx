@@ -71,7 +71,7 @@ const ProductViewer = () => {
       >
         <StudioLights />
         {/* <ambientLight intensity={1} /> */}
-        <MacbookModel14 scale={0.06} position={[0, 0, 0]} />
+        {/* <MacbookModel14 scale={0.06} position={[0, 0, 0]} /> */}
         <ModelSwitcher
           scale={isMobile ? scale - 0.03 : scale}
           isMobile={isMobile}
