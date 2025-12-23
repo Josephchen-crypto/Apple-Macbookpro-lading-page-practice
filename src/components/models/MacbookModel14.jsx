@@ -24,6 +24,7 @@ export default function MacbookModel14(props) {
   const texture = useTexture("/screen.png");
 
   useEffect(() => {
+    //
     scene.traverse((child) => {
       if (child.isMesh) {
         if (!noChangeParts.includes(child.name)) {
