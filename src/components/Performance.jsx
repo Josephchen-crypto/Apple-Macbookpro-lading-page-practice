@@ -50,7 +50,7 @@ const Performance = () => {
 
       // Position Each Performance Image
       performanceImgPositions.forEach((item) => {
-        if (item.id === "p5") return;
+        if (item.animate === false) return;
 
         const selector = `.${item.id}`;
         const vars = {};
