@@ -364,7 +364,7 @@ body {
     @apply w-dvw h-full overflow-hidden pt-20 lg:pt-20 flex flex-col items-center relative;
 
     h2 {
-      @apply font-semibold text-3xl mt-20 lg:text-6xl text-white max-w-2xl text-center;
+      @apply font-semibold text-3xl mt-20 mx-5 lg:text-6xl text-white max-w-2xl text-center;
     }
 
     .wrapper {
